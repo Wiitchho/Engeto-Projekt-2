@@ -1,8 +1,10 @@
 import random
+
 #uvítání
 def nahodne_gener_c():
     while True:
         nahodne_cislo = int(random.random() * 9999)
+
         if len(str(nahodne_cislo)) == 4:
             break
     return nahodne_cislo
@@ -18,4 +20,25 @@ print('Vítám tě u hry Bulls & Cows,',uvitani,
       uvitani, sep='\n')
 
 #Náhodně generované číslo
-print(nahodne_gener_c())
+sifra = nahodne_gener_c()
+print(sifra)
+
+#3.Hráč hádá číslo. Program jej upozorní, pokud zadá číslo kratší nebo delší než 4 čísla,
+# pokud bude obsahovat duplicity,začínat nulou, příp. obsahovat nečíselné znaky
+# Program vyhodnotí tip uživatele
+
+while True:
+    hadam = int(input('Hádej číslo:'))
+    if len(str(hadam)) != 4:
+        print('Neplatný pokus')
+    else:
+        if hadam == sifra:
+            print('Uhodnuto')
+            break
+        else:
+            print('Zkus to znovu!')
+
+
+
+
+
