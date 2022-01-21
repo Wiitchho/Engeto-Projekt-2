@@ -1,11 +1,20 @@
 import random
 
+def nahodne_org_cisla():
+    seznam = [1,2,3,4,5,6,7,8,9]
+    cislo = str(random.sample(seznam, 4))
+    #spojit seznam do jednoho stringu
+    return cislo
+
+
 #uvítání
 def nahodne_gener_c():
     while True:
         nahodne_cislo = int(random.random() * 9999)
 
         if len(str(nahodne_cislo)) == 4:
+            for cislo in nahodne_cislo:
+                if cislo in nahodne_cislo
             break
     return nahodne_cislo
 
@@ -21,7 +30,7 @@ print('Vítám tě u hry Bulls & Cows,',uvitani,
 
 #Náhodně generované číslo
 sifra = nahodne_gener_c()
-print(sifra)
+print(nahodne_org_cisla())
 
 #3.Hráč hádá číslo. Program jej upozorní, pokud zadá číslo kratší nebo delší než 4 čísla,
 # pokud bude obsahovat duplicity,začínat nulou, příp. obsahovat nečíselné znaky
