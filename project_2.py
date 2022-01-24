@@ -27,24 +27,28 @@ def hra_start():
 
 
 def hrac_hada(vizual):
+    #Funkce HOTOVA!
     '''
     funkce na hádání číslice
     :param vizual:  '_ _ _ _'
     :return: zadaná číslice v proměnné tip
     '''
     print(' '.join(vizual))
-    tip = input('Zadej císlici:')
+    tip = str(input('Zadej císlici:'))
     return tip
 
 def uhadnute_cislo(tip,cisla,vizual):
 # dodelat premisteni '-', hlásí to chyba v indexu a blokuje chod kódu!
     bulls = 0
-    #Cows = 0
+    cows = 0
     for i,cislo in enumerate(cisla):
-        if cislo == tip:
+        print(i,cislo)
+        if cisla == vizual[i]:
             vizual[i] = tip
             bulls += 1
             print(f'Bulls : {bulls}')
+        elif cisla in vizual:
+            cown += 1
 
 
 
@@ -86,6 +90,7 @@ print('Vítám tě u hry Bulls & Cows,',uvitani,
 # Program vyhodnotí tip uživatele
 
 hra_start()
+
 
 
 
