@@ -43,8 +43,8 @@ def uhadnute_cislo(tip,cisla,vizual):
     cows = 0
     for i,cislo in enumerate(cisla):
         print(i,cislo)
-        if cisla == vizual[i]:
-            vizual[i] = tip
+        if cislo == vizual[i]:
+            vizual[i] = cislo
             bulls += 1
             print(f'Bulls : {bulls}')
         elif cisla in vizual:
@@ -52,25 +52,27 @@ def uhadnute_cislo(tip,cisla,vizual):
 
 
 
-def kontrola_hrace():
+def kontrola_hrace(tip):
 #Dodělat kontrolu hráče, není zapojena do programu!
-    seznam_cisel = []
     while True:
-        zadavani = input('Zadej váš 4 místný kód')
-        if len(str(zadavani)) != 4:
-            print('Kód má obsahovat pouze 4 číslice!')
-        elif int(zadavani) == 0:
+        if len(str(tip)) != 4:
+            print('Kód má obsahovat 4 číslice!')
+            continue
+        elif int(tip) == 0:
             print('Kód nesmí začínat 0')
-        #elif not zadavani.isnumeric():
-            #print('Kód obsahuje nepovolené znaky')
-        for cisla in zadavani:
-            if cisla in seznam_cisel:
-                seznam_cisel.append(cisla)
-                print('Číslo musí být originál')
+            continue
+        elif not str(tip).isnumeric():
+            print('Kód obsahuje nepovolené znaky')
+            continue
+        else:
+            #dodelat podminku
+            for cislo in tip:
+
+
 
     else:
         print('vše je OK')
-        False
+        break
 
 
 
