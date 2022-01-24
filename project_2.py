@@ -1,6 +1,13 @@
 import random
 
 def nahodne_org_cisla():
+    #FUNKCE HOTOVÁ!
+    '''
+    funkce ke generování náhodného 4-místného unikátního čísla
+    Ze seznamu vždy vezme jeden parametr a připojí ho do proměnné s_t_r
+
+    :return: 4 místný uníkátní kód uložený ve strignu
+    '''
     seznam = [1,2,3,4,5,6,7,8,9]
     cislo_seznam = random.sample(seznam, 4)
     s_t_r = ''
@@ -10,10 +17,39 @@ def nahodne_org_cisla():
     return s_t_r
 
 def hra_start():
-    True
-    nahodne_org_cisla()
+    vizual = ['____']
+    cisla = nahodne_org_cisla()
+
+    while True:
+        tip = hrac_hada(vizual)
+        uhadnute_cislo(tip,cisla,vizual)
+
+
+
+def hrac_hada(vizual):
+    '''
+    funkce na hádání číslice
+    :param vizual:  '_ _ _ _'
+    :return: zadaná číslice v proměnné tip
+    '''
+    print(' '.join(vizual))
+    tip = input('Zadej císlici:')
+    return tip
+
+def uhadnute_cislo(tip,cisla,vizual):
+# dodelat premisteni '-', hlásí to chyba v indexu a blokuje chod kódu!
+    bulls = 0
+    #Cows = 0
+    for i,cislo in enumerate(cisla):
+        if cislo == tip:
+            vizual[i] = tip
+            bulls += 1
+            print(f'Bulls : {bulls}')
+
+
 
 def kontrola_hrace():
+#Dodělat kontrolu hráče, není zapojena do programu!
     seznam_cisel = []
     while True:
         zadavani = input('Zadej váš 4 místný kód')
@@ -36,28 +72,21 @@ def kontrola_hrace():
 
 #uvítání
 oddelovac = 20 * '-'
-uvitani = len('Vítám tě u hry Bulls & Cows!') * '-'
+uvitani = len('Vítám tě u hry Bulls & Cows!') * '--'
 
 print('Vítám tě u hry Bulls & Cows,',uvitani,
       'Program vytvoří 4 místný náhodný číselný kód',
       'Tvým cílem je uhadnout tyto čísla! ',
+      uvitani,
+      'Každé číslo je unikátní a proto se neopakuje',
       uvitani, sep='\n')
 
 #3.Hráč hádá číslo. Program jej upozorní, pokud zadá číslo kratší nebo delší než 4 čísla,
 # pokud bude obsahovat duplicity,začínat nulou, příp. obsahovat nečíselné znaky
 # Program vyhodnotí tip uživatele
 
-
-
-
-
 hra_start()
-while hra_start():
-    zadavani = input('Zadej váš 4 místný kód')
-    for i,cislo in enumerate(zadavani):
-        if cislo in gener_num:
-            print(cislo)
-            print('správně')
+
 
 
 
