@@ -37,42 +37,56 @@ def hrac_hada(vizual):
     tip = str(input('Zadej císlici:'))
     return tip
 
-def uhadnute_cislo(tip,cisla,vizual):
+def uhadnute_cislo(tip,org_cisla,vizual):
 # dodelat premisteni '-', hlásí to chyba v indexu a blokuje chod kódu!
     bulls = 0
     cows = 0
-    for i,cislo in enumerate(cisla):
+    for i,cislo in enumerate(org_cisla):
         print(i,cislo)
         if cislo == vizual[i]:
             vizual[i] = cislo
             bulls += 1
             print(f'Bulls : {bulls}')
-        elif cisla in vizual:
+        elif org_cisla in vizual:
             cown += 1
 
-
-
 def kontrola_hrace(tip):
-#Dodělat kontrolu hráče, není zapojena do programu!
+    #FUNC HOTOVA!
+    '''
+    Func slouží k ověření vstupu (tip) od hráče, zda, splňuje podmínky.
+    1.(tip) obsahuje jenom čísla a ne žádné jíné znaky.
+    2.(tip) má délku 4.
+    3.(tip) nezačíná 0.
+    4.neopakují čísla v (tip).
+    :param tip: Vstup od hráče který tipuje.
+    :return: Vrací Boolen True, když je vše ok nebo False.
+    '''
+    tip1 = str(tip)
+    kontrola_set = []
+    spravnost = True
     while True:
-        if len(str(tip)) != 4:
+        if not str(tip1).isnumeric():
+            print('Kód obsahu<je nepovolené znaky')
+            spravnost = False
+            break
+        if len(str(tip1)) != 4:
             print('Kód má obsahovat 4 číslice!')
-            continue
-        elif int(tip) == 0:
+            spravnost = False
+            break
+        elif int(tip1) == 0:
             print('Kód nesmí začínat 0')
-            continue
-        elif not str(tip).isnumeric():
-            print('Kód obsahuje nepovolené znaky')
-            continue
-        else:
-            #dodelat podminku
-            for cislo in tip:
-
-
-
-    else:
-        print('vše je OK')
-        break
+            spravnost = False
+            break
+        elif spravnost:
+            for cislo in str(tip1):
+                if cislo not in kontrola_set:
+                    kontrola_set.append(cislo)
+                else:
+                    print('V kódu se opakují čísla!')
+                    spravnost = False
+                    break
+            break
+    return spravnost
 
 
 
