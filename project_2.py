@@ -1,7 +1,7 @@
 import random
 
 def nahodne_org_cisla():
-    #FUNKCE HOTOVÁ!
+    #HOTOVÁ FUNC!
     '''
     funkce ke generování náhodného 4-místného unikátního čísla
     Ze seznamu vždy vezme jeden parametr a připojí ho do proměnné s_t_r
@@ -27,7 +27,7 @@ def hra_start():
 
 
 def hrac_hada(vizual):
-    #Funkce HOTOVA!
+    #HOTOVA FUNC!
     '''
     funkce na hádání číslice
     :param vizual:  '_ _ _ _'
@@ -37,18 +37,14 @@ def hrac_hada(vizual):
     tip = str(input('Zadej císlici:'))
     return tip
 
-def uhadnute_cislo(tip,org_cisla,vizual):
-# dodelat premisteni '-', hlásí to chyba v indexu a blokuje chod kódu!
-    bulls = 0
-    cows = 0
-    for i,cislo in enumerate(org_cisla):
-        print(i,cislo)
-        if cislo == vizual[i]:
-            vizual[i] = cislo
-            bulls += 1
-            print(f'Bulls : {bulls}')
-        elif org_cisla in vizual:
-            cown += 1
+def cow_kontrola(tip,cislo_org):
+    #HOTOVÁ FUNC!
+    cow = 0
+    for cislo in tip:
+        if cislo in cislo_org:
+            cow += 1
+    return cow
+
 
 def kontrola_hrace(tip):
     #FUNC HOTOVA!
