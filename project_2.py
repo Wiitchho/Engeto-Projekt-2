@@ -13,37 +13,59 @@ def nahodne_org_cisla():
     s_t_r = ''
     for cislo in cislo_seznam:
         s_t_r += str(cislo)
-    print(s_t_r) # vymazat print, je jenom pro kontrolu
     return s_t_r
 
-def hra_start():
-    vizual = ['____']
-    cisla = nahodne_org_cisla()
-
-    while True:
-        tip = hrac_hada(vizual)
-        uhadnute_cislo(tip,cisla,vizual)
-
-
-
-def hrac_hada(vizual):
+def hrac_hada():
     #HOTOVA FUNC!
     '''
     funkce na hádání číslice
     :param vizual:  '_ _ _ _'
     :return: zadaná číslice v proměnné tip
     '''
-    print(' '.join(vizual))
     tip = str(input('Zadej císlici:'))
     return tip
 
 def cow_kontrola(tip,cislo_org):
+    '''
+    :param tip: Tip hráče
+    :param cislo_org: Unikátní kód, který se snaží uhodnout
+    :return: Vrátí počet čísel, které uživatel zadal jako tip a jsou v kódu,
+     ale ne na správném místě.
+    '''
     #HOTOVÁ FUNC!
     cow = 0
     for cislo in tip:
         if cislo in cislo_org:
             cow += 1
     return cow
+
+def bull_kontrola (tip,cislo_org):
+    '''
+    Func. která počítá bull. bull = tip hráče -> soprávné číslo na správném místě
+    :param tip: Tip hráče
+    :param cislo_org: Unikátní kód, který se snaží uhodnout
+    :return: Vrátí počet čísel, které uživatel zadal jako tip a trefil i umístění.
+    '''
+    #HOTOVÁ FUNC!
+    bull = 0
+    for i, cislo_org in enumerate(cislo_org):
+        if cislo_org in tip[i]:
+            bull += 1
+
+    return bull
+
+
+def vypocet_cow(bull,cow):
+    #FUNC HOTOVA!
+    '''
+    Počítá jaký je cow, když je min. 1 bull.
+    :param bull:
+    počet bull v tipu
+    počet cow v tipu
+    :return: vrací počet cow
+    '''
+    vysledek = cow - bull
+    return vysledek
 
 
 def kontrola_hrace(tip):
@@ -83,6 +105,44 @@ def kontrola_hrace(tip):
                     break
             break
     return spravnost
+def mnoz_jedno(bull, cow):
+    #FUNC HOTOVA!
+    '''
+    Kontrola pro jednotné a nebo množné číslo textu (Bull a Cow) vs (Bulls a Cows).
+    :param bull:Když je bull větší jak 1 Tak je množné číslo Bulls
+    :param cow: Když je cow větší jak 1 tak je množné číslo Cows
+    :return: Vrátí tupl s upraveným textem podle jednotného nebo množného čísla.
+    '''
+    bull_text = ''
+    cow_text = ''
+    if bull > 1:
+        bull_text = 'Bulls'
+    elif bull <= 1:
+        bull_text = 'Bull'
+    if cow > 1:
+        cow_text = 'Cows'
+    elif cow <= 1:
+        cow_text = 'Cow'
+    return bull_text, cow_text
+
+def hra_start():
+    '''
+    Func která spojuje ostatní funkce do jedné a díky tomu běží celá hra
+    :return:
+    '''
+    hra_bezi = True
+    sifra = nahodne_org_cisla()
+    while hra_bezi:
+        tip_hrace = hrac_hada()
+        kontrola = kontrola_hrace(tip_hrace)
+        if kontrola == True:
+            bull = bull_kontrola(tip_hrace,sifra)
+            cow = cow_kontrola(tip_hrace,sifra)
+            cow_vysledek = vypocet_cow(bull,cow)
+            print(bull,mnoz_jedno(bull,cow_vysledek)[0],)
+            print(cow_vysledek,mnoz_jedno(bull,cow_vysledek)[1])
+            if bull == 4:
+                hra_bezi = False
 
 
 
@@ -100,8 +160,10 @@ print('Vítám tě u hry Bulls & Cows,',uvitani,
 #3.Hráč hádá číslo. Program jej upozorní, pokud zadá číslo kratší nebo delší než 4 čísla,
 # pokud bude obsahovat duplicity,začínat nulou, příp. obsahovat nečíselné znaky
 # Program vyhodnotí tip uživatele
-
 hra_start()
+print('Gratuluji, vyhrál jsi!')
+print('Tvoje statistiky:')
+
 
 
 
