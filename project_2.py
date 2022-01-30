@@ -124,6 +124,20 @@ def mnoz_jedno(bull, cow):
     elif cow <= 1:
         cow_text = 'Cow'
     return bull_text, cow_text
+def menu():
+    '''
+    Menu: nabídka co hra obsahuje a možnost se rozhodnout
+    :return:
+    '''
+moznosti = ['hrej','statistika','ukoncit']
+print('hrej|statistika|ukoncit')
+volba = str(input('Zvol jednu z možností!'))
+if volba == moznosti[0]:
+    hra_start()
+elif volba == moznosti[1]:
+    print('Tvoje statistiky:')
+elif volba == moznosti[2]:
+    quit()
 
 def hra_start():
     '''
@@ -142,13 +156,16 @@ def hra_start():
             print(bull,mnoz_jedno(bull,cow_vysledek)[0],)
             print(cow_vysledek,mnoz_jedno(bull,cow_vysledek)[1])
             if bull == 4:
+                print(f'Gratuluji, vyhrál jsi!, Tvoje číslo bylo: {sifra}')
                 hra_bezi = False
 
 
 
 #uvítání
+
 oddelovac = 20 * '-'
 uvitani = len('Vítám tě u hry Bulls & Cows!') * '--'
+
 
 print('Vítám tě u hry Bulls & Cows,',uvitani,
       'Program vytvoří 4 místný náhodný číselný kód',
@@ -156,12 +173,12 @@ print('Vítám tě u hry Bulls & Cows,',uvitani,
       uvitani,
       'Každé číslo je unikátní a proto se neopakuje',
       uvitani, sep='\n')
-
+menu()
 #3.Hráč hádá číslo. Program jej upozorní, pokud zadá číslo kratší nebo delší než 4 čísla,
 # pokud bude obsahovat duplicity,začínat nulou, příp. obsahovat nečíselné znaky
 # Program vyhodnotí tip uživatele
-hra_start()
-print('Gratuluji, vyhrál jsi!')
+#chces hrát znova nebo chces statistiky?
+
 print('Tvoje statistiky:')
 
 
