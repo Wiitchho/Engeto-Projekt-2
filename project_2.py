@@ -1,3 +1,4 @@
+import datetime
 import random
 
 def nahodne_org_cisla():
@@ -14,47 +15,41 @@ def nahodne_org_cisla():
     for cislo in cislo_seznam:
         s_t_r += str(cislo)
     return s_t_r
-
 def hrac_hada():
     #HOTOVA FUNC!
     '''
     funkce na hádání číslice
-    :param vizual:  '_ _ _ _'
     :return: zadaná číslice v proměnné tip
     '''
     tip = str(input('Zadej císlici:'))
     return tip
-
 def cow_kontrola(tip,cislo_org):
+    # HOTOVÁ FUNC!
     '''
     :param tip: Tip hráče
     :param cislo_org: Unikátní kód, který se snaží uhodnout
     :return: Vrátí počet čísel, které uživatel zadal jako tip a jsou v kódu,
      ale ne na správném místě.
     '''
-    #HOTOVÁ FUNC!
     cow = 0
     for cislo in tip:
         if cislo in cislo_org:
             cow += 1
     return cow
-
 def bull_kontrola (tip,cislo_org):
+    # HOTOVÁ FUNC!
     '''
     Func. která počítá bull. bull = tip hráče -> soprávné číslo na správném místě
     :param tip: Tip hráče
     :param cislo_org: Unikátní kód, který se snaží uhodnout
     :return: Vrátí počet čísel, které uživatel zadal jako tip a trefil i umístění.
     '''
-    #HOTOVÁ FUNC!
     bull = 0
     for i, cislo_org in enumerate(cislo_org):
         if cislo_org in tip[i]:
             bull += 1
 
     return bull
-
-
 def vypocet_cow(bull,cow):
     #FUNC HOTOVA!
     '''
@@ -66,12 +61,11 @@ def vypocet_cow(bull,cow):
     '''
     vysledek = cow - bull
     return vysledek
-
-
-def kontrola_hrace(tip):
+def kontrola_hrace(tip,org_cislo):
     #FUNC HOTOVA!
     '''
     Func slouží k ověření vstupu (tip) od hráče, zda, splňuje podmínky.
+    Tlačítko pro možné rychlé ukončení(KO).
     1.(tip) obsahuje jenom čísla a ne žádné jíné znaky.
     2.(tip) má délku 4.
     3.(tip) nezačíná 0.
@@ -83,6 +77,10 @@ def kontrola_hrace(tip):
     kontrola_set = []
     spravnost = True
     while True:
+        if tip == 'KO':
+            print(f'Prohrál jsi, cislo bylo: {org_cislo}')
+            quit()
+
         if not str(tip1).isnumeric():
             print('Kód obsahu<je nepovolené znaky')
             spravnost = False
@@ -124,62 +122,68 @@ def mnoz_jedno(bull, cow):
     elif cow <= 1:
         cow_text = 'Cow'
     return bull_text, cow_text
-def menu():
-    '''
-    Menu: nabídka co hra obsahuje a možnost se rozhodnout
-    :return:
-    '''
-moznosti = ['hrej','statistika','ukoncit']
-print('hrej|statistika|ukoncit')
-volba = str(input('Zvol jednu z možností!'))
-if volba == moznosti[0]:
-    hra_start()
-elif volba == moznosti[1]:
-    print('Tvoje statistiky:')
-elif volba == moznosti[2]:
-    quit()
-
 def hra_start():
     '''
     Func která spojuje ostatní funkce do jedné a díky tomu běží celá hra
     :return:
     '''
+    cas_start = datetime.datetime.now()
+    cas_start.strftime('%M:%S')
     hra_bezi = True
     sifra = nahodne_org_cisla()
+    pocet_pokusu = 0
     while hra_bezi:
         tip_hrace = hrac_hada()
-        kontrola = kontrola_hrace(tip_hrace)
+        kontrola = kontrola_hrace(tip_hrace,sifra)
         if kontrola == True:
             bull = bull_kontrola(tip_hrace,sifra)
             cow = cow_kontrola(tip_hrace,sifra)
             cow_vysledek = vypocet_cow(bull,cow)
             print(bull,mnoz_jedno(bull,cow_vysledek)[0],)
             print(cow_vysledek,mnoz_jedno(bull,cow_vysledek)[1])
+            pocet_pokusu += 1
             if bull == 4:
-                print(f'Gratuluji, vyhrál jsi!, Tvoje číslo bylo: {sifra}')
+                print(f'Gratuluji, vyhrál jsi!, Tvoje číslo bylo: {sifra}',
+                      f'Potřeboval jsi k tomu : {pocet_pokusu} pokusů!',
+                      sep='\n')
+
                 hra_bezi = False
 
-
-
-#uvítání
-
+#Začátek programu________________
 oddelovac = 20 * '-'
 uvitani = len('Vítám tě u hry Bulls & Cows!') * '--'
-
 
 print('Vítám tě u hry Bulls & Cows,',uvitani,
       'Program vytvoří 4 místný náhodný číselný kód',
       'Tvým cílem je uhadnout tyto čísla! ',
       uvitani,
       'Každé číslo je unikátní a proto se neopakuje',
-      uvitani, sep='\n')
-menu()
-#3.Hráč hádá číslo. Program jej upozorní, pokud zadá číslo kratší nebo delší než 4 čísla,
-# pokud bude obsahovat duplicity,začínat nulou, příp. obsahovat nečíselné znaky
-# Program vyhodnotí tip uživatele
-#chces hrát znova nebo chces statistiky?
+      'Program bude ukazovat počet Bull/s a Cow/s',
+      uvitani,
+      'Bull znamená, že si trefil číslo i jeho umístění',
+      'Cow znamená, že jsi uhádl číslici, ale ne umístění',
+      uvitani,
+      'Pravidla:',
+      '1. Číslice musí být 4',
+      '2. Číslice se nesmí opakovat',
+      '3. Nejsou povoleny žádné jinačí znaky kromě číslic',
+      uvitani,
+      'Pokud se budeš chtít vzdát, napiš KO',
+      uvitani,
+      sep='\n')
+cas_start = datetime.datetime.now()
+cas_start.strftime('%M:%S')
 
-print('Tvoje statistiky:')
+hra_start()
+
+#chces hrát znova nebo chces statistiky?
+cas_konec = datetime.datetime.now()
+cas_konec.strftime('%M:%S')
+final_cas = cas_konec - cas_start
+print(uvitani)
+print(f'Trvalo ti to přesně : {final_cas}')
+
+
 
 
 
