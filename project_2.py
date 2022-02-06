@@ -6,15 +6,20 @@ def nahodne_org_cisla():
     '''
     funkce ke generování náhodného 4-místného unikátního čísla
     Ze seznamu vždy vezme jeden parametr a připojí ho do proměnné s_t_r
-
+    Číslo nesmí začínat 0, jinak se celá funkce opakuje.
     :return: 4 místný uníkátní kód uložený ve strignu
     '''
-    seznam = [1,2,3,4,5,6,7,8,9]
-    cislo_seznam = random.sample(seznam, 4)
-    s_t_r = ''
-    for cislo in cislo_seznam:
-        s_t_r += str(cislo)
-    return s_t_r
+    seznam = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    hra = True
+    while hra:
+        cislo_seznam = random.sample(seznam, 4)
+        s_t_r = ''
+        for cislo in cislo_seznam:
+            if '0' not in cislo_seznam[0]:
+                s_t_r += cislo
+        if len(s_t_r) == 4:
+            hra = False
+        return s_t_r
 def hrac_hada():
     #HOTOVA FUNC!
     '''
@@ -80,9 +85,12 @@ def kontrola_hrace(tip,org_cislo):
         if tip == 'KO':
             print(f'Prohrál jsi, cislo bylo: {org_cislo}')
             quit()
-
+        if tip1[0] == '0':
+            print('Tip nesmí začínat 0!')
+            spravnost = False
+            break
         if not str(tip1).isnumeric():
-            print('Kód obsahu<je nepovolené znaky')
+            print('Kód obsahuje nepovolené znaky')
             spravnost = False
             break
         if len(str(tip1)) != 4:
