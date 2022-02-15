@@ -132,7 +132,7 @@ def mnoz_jedno(bull, cow):
     return bull_text, cow_text
 def hra_start():
     '''
-    Func která spojuje ostatní funkce do jedné a díky tomu běží celá hra
+    Func, která spojuje ostatní funkce do jedné a díky tomu běží celá hra
     :return:
     '''
     cas_start = datetime.datetime.now()
