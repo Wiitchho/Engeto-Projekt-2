@@ -158,10 +158,10 @@ def hra_start():
                 hra_bezi = False
 
 #Začátek programu________________
-oddelovac = 20 * '-'
-uvitani = len('Vítám tě u hry Bulls & Cows!') * '--'
+def main():
+    uvitani = len('Vítám tě u hry Bulls & Cows!') * '--'
 
-print('Vítám tě u hry Bulls & Cows,',uvitani,
+    print('Vítám tě u hry Bulls & Cows,',uvitani,
       'Program vytvoří 4 místný náhodný číselný kód',
       'Tvým cílem je uhadnout tyto čísla! ',
       uvitani,
@@ -179,17 +179,19 @@ print('Vítám tě u hry Bulls & Cows,',uvitani,
       'Pokud se budeš chtít vzdát, napiš KO',
       uvitani,
       sep='\n')
-cas_start = datetime.datetime.now()
-cas_start.strftime('%M:%S')
+    cas_start = datetime.datetime.now()
+    cas_start.strftime('%M:%S')
 
-hra_start()
+    hra_start()
 
 #chces hrát znova nebo chces statistiky?
-cas_konec = datetime.datetime.now()
-cas_konec.strftime('%M:%S')
-final_cas = cas_konec - cas_start
-print(uvitani)
-print(f'Trvalo ti to přesně : {final_cas}')
+    cas_konec = datetime.datetime.now()
+    cas_konec.strftime('%M:%S')
+    final_cas = cas_konec - cas_start
+    print(uvitani)
+    print(f'Trvalo ti to přesně : {final_cas}')
+if __name__ == "__main__":
+    main()
 
 
 
