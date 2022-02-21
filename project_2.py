@@ -12,11 +12,13 @@ def nahodne_org_cisla():
     seznam = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     hra = True
     while hra:
-        cislo_seznam = random.sample(seznam, 4)
+        while True:
+            cislo_seznam = random.sample(seznam, 4)
+            if cislo_seznam[0] != '0':
+                break
         s_t_r = ''
         for cislo in cislo_seznam:
-            if '0' not in cislo_seznam[0]:
-                s_t_r += cislo
+            s_t_r += cislo
         if len(s_t_r) == 4:
             hra = False
         return s_t_r
