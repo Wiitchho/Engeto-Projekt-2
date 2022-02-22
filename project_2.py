@@ -1,8 +1,8 @@
 import datetime
 import random
 
+
 def nahodne_org_cisla():
-    #HOTOVÁ FUNC!
     '''
     funkce ke generování náhodného 4-místného unikátního čísla
     Ze seznamu vždy vezme jeden parametr a připojí ho do proměnné s_t_r
@@ -22,16 +22,18 @@ def nahodne_org_cisla():
         if len(s_t_r) == 4:
             hra = False
         return s_t_r
+
+
 def hrac_hada():
-    #HOTOVA FUNC!
     '''
     funkce na hádání číslice
     :return: zadaná číslice v proměnné tip
     '''
-    tip = str(input('Zadej císlici:'))
+    tip = input('Zadej císlici:')
     return tip
+
+
 def cow_kontrola(tip,cislo_org):
-    # HOTOVÁ FUNC!
     '''
     :param tip: Tip hráče
     :param cislo_org: Unikátní kód, který se snaží uhodnout
@@ -43,8 +45,9 @@ def cow_kontrola(tip,cislo_org):
         if cislo in cislo_org:
             cow += 1
     return cow
+
+
 def bull_kontrola (tip,cislo_org):
-    # HOTOVÁ FUNC!
     '''
     Func. která počítá bull. bull = tip hráče -> soprávné číslo na správném místě
     :param tip: Tip hráče
@@ -57,8 +60,9 @@ def bull_kontrola (tip,cislo_org):
             bull += 1
 
     return bull
+
+
 def vypocet_cow(bull,cow):
-    #FUNC HOTOVA!
     '''
     Počítá jaký je cow, když je min. 1 bull.
     :param bull:
@@ -68,8 +72,9 @@ def vypocet_cow(bull,cow):
     '''
     vysledek = cow - bull
     return vysledek
+
+
 def kontrola_hrace(tip,org_cislo):
-    #FUNC HOTOVA!
     '''
     Func slouží k ověření vstupu (tip) od hráče, zda, splňuje podmínky.
     Tlačítko pro možné rychlé ukončení(KO).
@@ -91,11 +96,11 @@ def kontrola_hrace(tip,org_cislo):
             print('Tip nesmí začínat 0!')
             spravnost = False
             break
-        if not str(tip1).isnumeric():
+        if not tip1.isnumeric():
             print('Kód obsahuje nepovolené znaky')
             spravnost = False
             break
-        if len(str(tip1)) != 4:
+        if len(tip1) != 4:
             print('Kód má obsahovat 4 číslice!')
             spravnost = False
             break
@@ -113,8 +118,9 @@ def kontrola_hrace(tip,org_cislo):
                     break
             break
     return spravnost
+
+
 def mnoz_jedno(bull, cow):
-    #FUNC HOTOVA!
     '''
     Kontrola pro jednotné a nebo množné číslo textu (Bull a Cow) vs (Bulls a Cows).
     :param bull:Když je bull větší jak 1 Tak je množné číslo Bulls
@@ -132,6 +138,8 @@ def mnoz_jedno(bull, cow):
     elif cow <= 1:
         cow_text = 'Cow'
     return bull_text, cow_text
+
+
 def hra_start():
     '''
     Func, která spojuje ostatní funkce do jedné a díky tomu běží celá hra
@@ -144,13 +152,13 @@ def hra_start():
     pocet_pokusu = 0
     while hra_bezi:
         tip_hrace = hrac_hada()
-        kontrola = kontrola_hrace(tip_hrace,sifra)
+        kontrola = kontrola_hrace(tip_hrace, sifra)
         if kontrola == True:
-            bull = bull_kontrola(tip_hrace,sifra)
-            cow = cow_kontrola(tip_hrace,sifra)
-            cow_vysledek = vypocet_cow(bull,cow)
-            print(bull,mnoz_jedno(bull,cow_vysledek)[0],)
-            print(cow_vysledek,mnoz_jedno(bull,cow_vysledek)[1])
+            bull = bull_kontrola(tip_hrace, sifra)
+            cow = cow_kontrola(tip_hrace, sifra)
+            cow_vysledek = vypocet_cow(bull, cow)
+            print(bull,mnoz_jedno(bull, cow_vysledek)[0],)
+            print(cow_vysledek, mnoz_jedno(bull, cow_vysledek)[1])
             pocet_pokusu += 1
             if bull == 4:
                 print(f'Gratuluji, vyhrál jsi!, Tvoje číslo bylo: {sifra}',
@@ -159,11 +167,11 @@ def hra_start():
 
                 hra_bezi = False
 
-#Začátek programu________________
+
 def main():
     uvitani = len('Vítám tě u hry Bulls & Cows!') * '--'
 
-    print('Vítám tě u hry Bulls & Cows,',uvitani,
+    print('Vítám tě u hry Bulls & Cows,', uvitani,
       'Program vytvoří 4 místný náhodný číselný kód',
       'Tvým cílem je uhadnout tyto čísla! ',
       uvitani,
@@ -186,7 +194,6 @@ def main():
 
     hra_start()
 
-#chces hrát znova nebo chces statistiky?
     cas_konec = datetime.datetime.now()
     cas_konec.strftime('%M:%S')
     final_cas = cas_konec - cas_start
